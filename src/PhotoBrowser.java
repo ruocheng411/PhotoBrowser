@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.sound.midi.VoiceStatus;
 import javax.swing.BoxLayout;
@@ -39,11 +41,10 @@ public class PhotoBrowser extends JFrame{
 	JLabel statusLabel = new JLabel("status");
 
 	JToolBar toolBar = new JToolBar();
-	JToggleButton familyJTB = new JToggleButton("Family");
-	JToggleButton vacationJTB = new JToggleButton("Vaction");
-	JToggleButton schoolJTB = new JToggleButton("School");    
+	ArrayList<JToggleButton> optionsListJTB = new ArrayList<JToggleButton>();
+ 
 	String message = new String("");
-	
+
 
 	private void setFileMenu(){
 		// File Menu
@@ -85,17 +86,56 @@ public class PhotoBrowser extends JFrame{
 		menuBar.add(viewMenu);
 		setJMenuBar(menuBar);
 	}
+	
+	private void addOptionsJTB(){
+		JToggleButton familyJTB = new JToggleButton("Family");
+		familyJTB.addActionListener(event->familyJTBfunc());
+		JToggleButton vacationJTB = new JToggleButton("Vaction");
+		vacationJTB.addActionListener(event->vacationJTBfunc());
+		JToggleButton schoolJTB = new JToggleButton("School"); 
+		schoolJTB.addActionListener(event->schoolJTBfunc());
+		optionsListJTB.add(familyJTB);
+		optionsListJTB.add(vacationJTB);
+		optionsListJTB.add(schoolJTB);
+	}
+	private void setSizeOfOptionsList(){
+		
+		Dimension maximumSize = new Dimension(60, 20);
+		Dimension minimumSize = new Dimension(60, 20);
+		for(JToggleButton button : optionsListJTB){
+			button.setMaximumSize(maximumSize);
+			button.setMinimumSize(minimumSize);
+		}
+		
+	}
+	
 	private void addToolBar(){
-		toolBar.add(familyJTB);
-		toolBar.add(vacationJTB);
-		toolBar.add(schoolJTB);
-		familyJTB.setBorderPainted(true);
+		addOptionsJTB();
+		setSizeOfOptionsList();
+		for(JToggleButton button : optionsListJTB){
+			toolBar.add(button);
+		}
+
 		add(toolBar,java.awt.BorderLayout.NORTH);
 
 	}
+	private void familyJTBfunc(){
+		message = "Famile";
+		setStatusMes(message);
+	}
+
+	private void vacationJTBfunc(){
+		message = "Vacation";
+		setStatusMes(message);
+	}
+	
+	private void schoolJTBfunc(){
+		message = "School";
+		setStatusMes(message);
+	}
 
 	private void addPanel(){
-		panel.setBackground(Color.lightGray);
+		panel.setBackground(Color.white);
 		add(panel,BorderLayout.CENTER);
 	}
 	private void addStatusBar(){
@@ -111,6 +151,7 @@ public class PhotoBrowser extends JFrame{
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 
 		addMenu();
+		addPanel();
 		addStatusBar();
 		addToolBar();
 
@@ -153,11 +194,11 @@ public class PhotoBrowser extends JFrame{
 
 		statusPanel.add(statusLabel, BorderLayout.WEST);
 	}
-	
+
 	private void setStatusMes(String message){
 		statusLabel.setText(" Status : " + message);
 	}
-	
+
 
 	public static void main(String[] args){
 		PhotoBrowser myBrowser = new PhotoBrowser();
@@ -167,12 +208,3 @@ public class PhotoBrowser extends JFrame{
 
 }
 
-//statusPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
-//add(statusPanel,BorderLayout.SOUTH);
-//statusPanel.setPreferredSize(new Dimension(this.getWidth(), 16));
-//statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
-
-//getContentPane().add(statusLabel, );
-//statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-//statusLabel.setPreferredSize(new Dimension(100,16));
-//statusLabel.setText("status");
