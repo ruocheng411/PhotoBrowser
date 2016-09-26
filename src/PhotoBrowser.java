@@ -120,18 +120,15 @@ public class PhotoBrowser extends JFrame{
 
 	}
 	private void familyJTBfunc(){
-		message = "Famile";
-		setStatusMes(message);
+		setStatusMes("Famile");
 	}
 
 	private void vacationJTBfunc(){
-		message = "Vacation";
-		setStatusMes(message);
+		setStatusMes("Vacation");
 	}
 	
 	private void schoolJTBfunc(){
-		message = "School";
-		setStatusMes(message);
+		setStatusMes("School");
 	}
 
 	private void addPanel(){
@@ -159,26 +156,22 @@ public class PhotoBrowser extends JFrame{
 	}
 	public void importFileFunc(){
 		setStatusMes("Import File");
-		fileChooser.showOpenDialog(null);
+		int returnVal = fileChooser.showOpenDialog(null);
 	}
 
 	public void deleteFileFunc(){
-		message = "Delete File";
-		setStatusMes(message);
+		setStatusMes("Delete File");
 	}
 
 	public void photoViewFunc(){
-		message = "Photo";
-		setStatusMes(message);
+		setStatusMes("Photo");
 	}
 
 	public void browserViewFunc(){
-		message = "Browser";
-		setStatusMes(message);
+		setStatusMes("Browser");
 	}
 	public void splitModeViewFunc(){
-		message = "Split Mode";
-		setStatusMes(message);
+		setStatusMes("Split Mode");
 	}
 
 	public void statusBar(){
